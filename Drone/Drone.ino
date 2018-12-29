@@ -9,6 +9,8 @@
 #include "CalLib.h"
 #include <EEPROM.h>
 
+#define SERV0_ROLL_PINNUM 11
+#define SERV0_PITCH_PINNUM 12
 #define BLDC_TOP_PINNUM 9
 #define BLDC_BOTTOM_PINNUM 10
 #define JOYSTICK_RX_PINNUM 8
@@ -49,8 +51,8 @@ Servo roll;
 Servo pitch;
 Servo bl0;
 Servo bl1;
-SERVO x  = { 11, 700, 0 };    // roll
-SERVO y = { 12, 700, 0 };     // pitch
+SERVO x  = { SERV0_ROLL_PINNUM, 700, 0 };    // roll
+SERVO y = { SERV0_PITCH_PINNUM, 700, 0 };     // pitch
 PID yaw = { 0, 0, 0, 0, 1, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 // buf1[Aileron], Buf2[Elevator], buf3[Throttle], buf4[Rudder], buf5[Checksum], 나머지는 사용x
