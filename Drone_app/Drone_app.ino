@@ -140,14 +140,18 @@ void loop() {
   //if (Serial.available()) {
   //  test = Serial.parseInt();
   //}
+/*
+  x1.control = map(buf[1], 45, 135, 90, 0);
+  x2.control = map(buf[1], 45, 135, 0, 90);
+  y1.control = map(buf[2], 45, 135, 90, 0);
+  y2.control = map(buf[2], 45, 135, 0, 90);*/
 
-  x1.control = map(buf[1], 45, 135, 135, 45);
-  x2.control = map(buf[1], 45, 135, 30, 120);
-  y1.control = map(buf[2], 45, 135, 120, 30);
-  y2.control = map(buf[2], 45, 135, 30, 120);
+
+  x1.control = map(x1.control, 45, 135, 135, 45);
+  x2.control = map(x2.control, 45, 135, 30, 120);
+  y1.control = map(y1.control, 45, 135, 120, 30);
+  y2.control = map(y2.control, 45, 135, 30, 120);
   
- // bl0.writeMicroseconds(test);
- // bl1.writeMicroseconds(test);
   roll_A.write(x1.control);
   roll_B.write(x2.control);
   pitch_A.write(y1.control);
@@ -155,7 +159,7 @@ void loop() {
   setPidBLDC(&yaw);
   yaw.preAngle = yaw.angle;
 
-  if (bldc_Control == 1000) {
+  if (bldc_Control == 0) {
     bl0.writeMicroseconds(1000);
     bl1.writeMicroseconds(1000);
     yaw.i = 0;
@@ -280,12 +284,12 @@ void setPidBLDC(PID * pid) {
 
 
 void debugDisplay() {
-  /*
+  
     for (int i = 1; i < 5; i++) {
     Serial.print(buf[i]); Serial.print("\t");
     }
-    Serial.print("\t\t");
-  */
+    Serial.print("\t");
+  
   Serial.print("yaw: "); Serial.print(yaw.diffAngle); Serial.print("\t");
   Serial.print("bl0: "); Serial.print(bl0_setValue); Serial.print("\t");
   Serial.print("bl1: "); Serial.print(bl1_setValue); Serial.print("\t");
